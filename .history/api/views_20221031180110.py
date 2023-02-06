@@ -1,0 +1,27 @@
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from .serializers import ProjectSerializer
+from proj.models import Project
+
+from api import serializers
+
+@api_view(["GET"])
+def getRoutes(request):
+    
+    routes = [
+        {"GET": "/api/projects"},
+        {"GET": "/api/projects/id"},
+        {"GET": "/api/projects/id/vote"},
+        
+        
+        {"POST": "/api/users/token/"},
+        {"POST": "/api/users/token/refresh"},
+    ]
+
+    return Response(routes)
+
+@api_view(["GET"])
+def getProjects(request):
+    projects = Project.objects.all()
+    serializer = ProjectSerializer(projects,many=True)
+    return 
